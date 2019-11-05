@@ -9,16 +9,18 @@ value_to_calc= ""
 def clickbut(character):
      global value_to_calc
      try:
-
+        if not (value_to_calc[-2] in ["/","*","+","-"] and value_to_calc[-1] in ["/","*","+","-"] and character in ["/","*","+","-"]) and not (value_to_calc[-1] in ["/","*","+","-","."] and character==".") and not (value_to_calc[-1] in ["/","*","+","-"] and character in ["/","*"]) and not(value_to_calc[-1]=="." and character in ["/","*","+","-"]):
             value_to_calc= value_to_calc + str(character)
             textin.set(value_to_calc)
-
      except:
-
         try:
-
-
+            if not (value_to_calc[-1] in ["/","*","+","-"] and character in ["/","*","+","-"]) and not (value_to_calc[-1] in ["/","*","+","-","."] and character==".") and not (value_to_calc[-1] in ["/","*","+","-"] and character in ["/","*"] and not(value_to_calc[-1]=="." and character in ["/","*","+","-"])):
+                value_to_calc= value_to_calc + str(character)
+                textin.set(value_to_calc)
         except:
+            if character not in ["/","*","."]:
+                value_to_calc= value_to_calc + str(character)
+                textin.set(value_to_calc)
 
 def Clear():
     global value_to_calc
@@ -33,6 +35,33 @@ def Del():
 
 def Result():
     global value_to_calc
+    try:
+        if value_to_calc[-1] not in ["/","*","+","-","."]:
+            num_list=[]
+            operetor_list=[]
+            num=""
+            for i in value_to_calc:
+                if num!="" and i in ["/","*","+","-"]:
+                    operetor_list.append(i)
+                    num_list.append(num)
+                    num=""
+                else:num+=i
+            num_list.append(num)
+            print(num_list,operetor_list)
+            value_to_calc=int(num_list[0])
+            for ind,operater in enumerate(operetor_list):
+                if operater=="+":
+                    value_to_calc+=int(num_list[ind+1])
+                if operater=="-":
+                    value_to_calc-=int(num_list[ind+1])
+                if operater=="/":
+                    value_to_calc/=int(num_list[ind+1])
+                if operater=="*":
+                    value_to_calc*=int(num_list[ind+1])
+            value_to_calc=str(value_to_calc)
+            textin.set(value_to_calc)
+    except:
+        pass
 
 metext=Entry(screen, font=("Courier New", 30, 'bold'), textvar=textin, width=25, bd=5, bg='powder blue')
 metext.pack()
