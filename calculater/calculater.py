@@ -48,16 +48,16 @@ def Result():
                 else:num+=i
             num_list.append(num)
             print(num_list,operetor_list)
-            value_to_calc=int(num_list[0])
+            value_to_calc=float(num_list[0])
             for ind,operater in enumerate(operetor_list):
                 if operater=="+":
-                    value_to_calc+=int(num_list[ind+1])
+                    value_to_calc+=float(num_list[ind+1])
                 if operater=="-":
-                    value_to_calc-=int(num_list[ind+1])
+                    value_to_calc-=float(num_list[ind+1])
                 if operater=="/":
-                    value_to_calc/=int(num_list[ind+1])
+                    value_to_calc/=float(num_list[ind+1])
                 if operater=="*":
-                    value_to_calc*=int(num_list[ind+1])
+                    value_to_calc*=float(num_list[ind+1])
             value_to_calc=str(value_to_calc)
             textin.set(value_to_calc)
     except:
