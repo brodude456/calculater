@@ -1,27 +1,43 @@
 from tkinter import *
-screen=Tk()
+screen = Tk()
 screen.geometry("354x460")
 screen.title("CALCULATOR")
 screen.config(background='Dark gray')
-textin=StringVar()
-value_to_calc= ""
-operetor_list1=["/","*","+","-"]
+textin = StringVar()
+value_to_calc = ""
+operetor_list1 = ["/", "*", "+", "-"]
+cifre ='0123456789'
 
 def clickbut(character):
-     global value_to_calc
-     try:
-        if not (value_to_calc[-2] in operetor_list1 and value_to_calc[-1] in operetor_list1 and character in operetor_list1) and not (value_to_calc[-1] in ["/","*","+","-","."] and character==".") and not (value_to_calc[-1] in operetor_list1 and character in ["/","*"]) and not(value_to_calc[-1]=="." and character in operetor_list1):
-            value_to_calc= value_to_calc + str(character)
-            textin.set(value_to_calc)
-     except:
-        try:
-            if not (value_to_calc[-1] in operetor_list1 and character in operetor_list1) and not (value_to_calc[-1] in ["/","*","+","-","."] and character==".") and not (value_to_calc[-1] in operetor_list1  and character in ["/","*"] and not(value_to_calc[-1]=="." and character in operetor_list1)):
-                value_to_calc= value_to_calc + str(character)
-                textin.set(value_to_calc)
-        except:
-            if character not in ["/","*","."]:
-                value_to_calc= value_to_calc + str(character)
-                textin.set(value_to_calc)
+    global value_to_calc
+
+    """
+    
+    prvi karakter moze biti cifra ili +-
+
+    cifra => tacka, cifra, +-*/
+    tacka => cifra
+    +-*/ => cifra +-
+
+
+    """
+
+    if len(value_to_calc)==0:
+        if character in "*/.":  #prvi karakter moze biti cifra ili +-
+            raise  Exception("prvi karakter mora biti cifra ili  + ili -!!!")
+    elif len(value_to_calc)==1:
+        if value_to_calc[0] in '+-' and character in [*operetor_list1,'.']:
+            raise Exception('ako je prvi karakter + ili - sljedeci ne smije biti operator ili tacka')
+    else:
+        if character in '*/.' and value_to_calc[-1] in [*operetor_list1,'.']:
+            raise Exception("tacka i operatori * i / mogu doci samo poslije cifre")
+        elif character in '+-' and value_to_calc[-1] == '.':
+            raise Exception("+ i - ne smiju doci poslije tacke")
+        elif character in '+-' and value_to_calc[-1] in'+-' and value_to_calc[-2] in operetor_list1:
+            raise Exception('+ i - se smiju ponavljati 2 puta')
+    
+    value_to_calc += str(character)
+    textin.set(value_to_calc)
 
 def Clear():
     global value_to_calc
@@ -80,7 +96,8 @@ design_dict={"0":(10,310),"1":(10,100),"2":(10,170),"3":(10,240),"4":(75,100),"5
             ,"7":(140,100),"8":(140,170),"9":(140,240),"+":(205,100),"-":(205,170),"/":(205,310),"*":(205,240)}
 
 for num in design_dict:
-    but=Button(screen, padx=14, pady=14, bd=4, bg='white',command=lambda:clickbut(num),text=num, font=("Courier New", 16, 'bold'))
+    print(num)
+    but=Button(screen, padx=14, pady=14, bd=4, bg='white',command=lambda number=num:clickbut(number),text=num, font=("Courier New", 16, 'bold'))
     but.place(x=design_dict[num][0],y=design_dict[num][1])
     print(design_dict[num])
 
