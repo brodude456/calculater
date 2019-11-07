@@ -5,21 +5,17 @@ screen.title("CALCULATOR")
 screen.config(background='Dark gray')
 textin=StringVar()
 value_to_calc= ""
-operetor_list1=operetor_list1 
+operetor_list1=["/","*","+","-"]
 
 def clickbut(character):
      global value_to_calc
      try:
-        if not (value_to_calc[-2] in operetor_list1 and value_to_calc[-1] in operetor_list1 and character in operetor_list1) and 
-        not (value_to_calc[-1] in ["/","*","+","-","."] and character==".") and not (value_to_calc[-1] in operetor_list1 and character in ["/","*"]) 
-        and not(value_to_calc[-1]=="." and character in operetor_list1):
+        if not (value_to_calc[-2] in operetor_list1 and value_to_calc[-1] in operetor_list1 and character in operetor_list1) and not (value_to_calc[-1] in ["/","*","+","-","."] and character==".") and not (value_to_calc[-1] in operetor_list1 and character in ["/","*"]) and not(value_to_calc[-1]=="." and character in operetor_list1):
             value_to_calc= value_to_calc + str(character)
             textin.set(value_to_calc)
      except:
         try:
-            if not (value_to_calc[-1] in operetor_list1 and character in operetor_list1) and not 
-            (value_to_calc[-1] in ["/","*","+","-","."] and character==".") and not (value_to_calc[-1] in operetor_list1 
-            and character in ["/","*"] and not(value_to_calc[-1]=="." and character in operetor_list1)):
+            if not (value_to_calc[-1] in operetor_list1 and character in operetor_list1) and not (value_to_calc[-1] in ["/","*","+","-","."] and character==".") and not (value_to_calc[-1] in operetor_list1  and character in ["/","*"] and not(value_to_calc[-1]=="." and character in operetor_list1)):
                 value_to_calc= value_to_calc + str(character)
                 textin.set(value_to_calc)
         except:
