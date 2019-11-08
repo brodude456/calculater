@@ -35,7 +35,13 @@ def clickbut(character):
             raise Exception("+ i - ne smiju doci poslije tacke")
         elif character in '+-' and value_to_calc[-1] in'+-' and value_to_calc[-2] in operetor_list1:
             raise Exception('+ i - se smiju ponavljati 2 puta')
-    
+    if character==".":
+        for ind in range(len(value_to_calc)-1,-1,-1):
+            if value_to_calc[ind] in operetor_list1:
+                break
+            elif value_to_calc[ind]==".":
+                raise Exception('nemogu dvije decimalne tacke u jednom broju')
+
     value_to_calc += str(character)
     textin.set(value_to_calc)
 
@@ -68,22 +74,22 @@ def Result():
             
             for ind,oper in enumerate(operetor_list):
                 if oper=="*":
-                    num_list[ind:ind+2]=str(int(num_list[ind])*int(num_list[ind+1]))
+                    num_list[ind:ind+2]=str(float(num_list[ind])*float(num_list[ind+1]))
                     num_list[ind:ind+2] = [''.join(num_list[ind:ind+2])]
                     operetor_list.remove(oper)
                 elif oper=="/":
-                    num_list[ind:ind + 2] = str(int(num_list[ind]) / int(num_list[ind + 1]))
+                    num_list[ind:ind + 2] = str(float(num_list[ind]) / float(num_list[ind + 1]))
                     num_list[ind:ind+2] = [''.join(num_list[ind:ind+2])]
                     operetor_list.remove(oper)
             print(operetor_list,num_list)
             
-            value_to_calc = int(num_list[0])
+            value_to_calc = float(num_list[0])
 
             for ind,operater in enumerate(operetor_list):
                 if operater=="+":
-                    value_to_calc+=int(num_list[ind+1])
+                    value_to_calc+=float(num_list[ind+1])
                 elif operater=="-":
-                    value_to_calc-=int(num_list[ind+1])
+                    value_to_calc-=float(num_list[ind+1])
             
             value_to_calc=str(value_to_calc)
             textin.set(value_to_calc)
