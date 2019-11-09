@@ -96,7 +96,7 @@ def Result():
     except:
         pass
 
-metext=Entry(screen, font=("Courier New", 30, 'bold'), textvar=textin, width=25, bd=5, bg='powder blue')
+metext=Entry(screen, font=("Courier New", 30, 'bold'), textvar=textin, width=25, bd=5, bg='powder blue',state='disabled')
 metext.pack()
 design_dict={"0":(10,310),"1":(10,100),"2":(10,170),"3":(10,240),"4":(75,100),"5":(75,170),"6":(75,240)
             ,"7":(140,100),"8":(140,170),"9":(140,240),"+":(205,100),"-":(205,170),"/":(205,310),"*":(205,240)}
